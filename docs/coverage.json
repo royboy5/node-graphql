@@ -1,0 +1,31 @@
+{
+  "coverage": "14.28%",
+  "expectCount": 7,
+  "actualCount": 1,
+  "files": {
+    "src/app.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        7,
+        8,
+        10
+      ]
+    },
+    "src/index.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "src/routes/home.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        4
+      ]
+    }
+  }
+}
