@@ -1,4 +1,4 @@
-# GraphQL 
+# Node GraphQL Server
 
 Built with,
 - Babel v7.2
