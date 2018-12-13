@@ -2,6 +2,9 @@ import path from 'path'
 import requireAll from 'require-all'
 import express from 'express'
 import bodyParser from 'body-parser'
+import expressGraphQL from 'express-graphql'
+
+import schema from './schema/schema'
 
 const utils = requireAll(path.join(__dirname, 'utils'))
 const routes = requireAll(path.join(__dirname, 'routes'))
@@ -21,5 +24,9 @@ app.use(bodyParser.json({ type: 'application/json' }))
  * Express Routes
  */
 app.use('/', routes.home)
+app.use('/graphiql', expressGraphQL({
+  schema,
+  graphiql: true
+}))
 
-module.exports = app
+export default app

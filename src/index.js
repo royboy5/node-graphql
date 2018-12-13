@@ -1,6 +1,7 @@
+import dotenv from 'dotenv'
+
 import log from './utils/logger'
 import app from './app'
-import dotenv from 'dotenv'
 
 dotenv.config()
 
