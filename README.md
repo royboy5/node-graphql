@@ -17,6 +17,8 @@ To start server
 ```
 $ npm start
 ```
+Open brower to,
+`http://localhost:5000/graphiql`
 
 ## ESDocs
 To create docs from src
