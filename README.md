@@ -1,4 +1,5 @@
 # Node GraphQL Server
+Playground for GraphQL Server.  Uses the Starwars API (https://swapi.co/)
 
 Built with,
 - Babel v7.2
