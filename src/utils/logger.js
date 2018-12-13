@@ -1,11 +1,14 @@
-import { logging } from '../config'
+import config from '../config'
 import winston from 'winston'
 import moment from 'moment'
 
 /**
  * Winston Logger with my defaults
  */
-module.exports = winston.createLogger({
+
+const { logging } = config
+
+export default winston.createLogger({
   transports: [
     new winston.transports.Console({
       timestamp () {

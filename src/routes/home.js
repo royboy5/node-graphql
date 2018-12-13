@@ -1,4 +1,4 @@
-import log from '../utils/logger'
+import { logger as log } from '../utils'
 import express from 'express'
 
 const router = new express.Router()
@@ -8,4 +8,4 @@ router.get('/', (req, res) => {
   res.json({ page: 'Home' })
 })
 
-module.exports = router
+export default router

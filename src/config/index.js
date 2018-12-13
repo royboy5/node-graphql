@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-module.exports = {
+export default {
   logging: {
     level: process.env.LOG_LEVEL || 'debug',
     query: true
