@@ -12,7 +12,8 @@
     "build": "babel src —-out-dir dist",
     "serve": "node dist/index.js",
     "docs:create": "esdoc",
-    "docs:open": "open ./docs/index.html"
+    "docs:open-osx": "open ./docs/index.html",
+    "docs:open-nix": "xdg-open ./docs/index.html"
   },
   "author": "",
   "license": "ISC",

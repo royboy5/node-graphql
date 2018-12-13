@@ -1,5 +1,11 @@
 window.esdocSearchIndex = [
   [
+    "node-graphql/src/app.js~app",
+    "variable/index.html#static-variable-app",
+    "<span>app</span> <span class=\"search-result-import-path\">node-graphql/src/app.js</span>",
+    "variable"
+  ],
+  [
     "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "src/.external-ecmascript.js~Array",
@@ -303,6 +309,24 @@ window.esdocSearchIndex = [
     "src/routes/home.js",
     "file/src/routes/home.js.html",
     "src/routes/home.js",
+    "file"
+  ],
+  [
+    "src/routes/index.js",
+    "file/src/routes/index.js.html",
+    "src/routes/index.js",
+    "file"
+  ],
+  [
+    "src/schema/schema.js",
+    "file/src/schema/schema.js.html",
+    "src/schema/schema.js",
+    "file"
+  ],
+  [
+    "src/utils/index.js",
+    "file/src/utils/index.js.html",
+    "src/utils/index.js",
     "file"
   ],
   [

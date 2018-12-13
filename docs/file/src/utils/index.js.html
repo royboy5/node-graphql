@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../">
-  <title data-ice="title">src/index.js | node-graphql</title>
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/utils/index.js | node-graphql</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -34,24 +34,8 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import dotenv from &apos;dotenv&apos;
-
-import { logger as log } from &apos;./utils&apos;
-import app from &apos;./app&apos;
-
-dotenv.config()
-
-/**
- * Server Configuration
- */
-const host = process.env.HOST || &apos;127.0.0.1&apos;
-const port = process.env.PORT || 5000
-
-/**
- * Runs the server
- */
-app.listen(port, host, log.info(`App listening at http://${host}:${port}`))
+<div class="content" data-ice="content"><h1 data-ice="title">src/utils/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export { default as logger } from &apos;./logger&apos;
 </code></pre>
 
 </div>

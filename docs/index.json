@@ -567,9 +567,9 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/app.js",
-    "content": "import path from 'path'\nimport requireAll from 'require-all'\nimport express from 'express'\nimport bodyParser from 'body-parser'\n\nconst utils = requireAll(path.join(__dirname, 'utils'))\nconst routes = requireAll(path.join(__dirname, 'routes'))\nconst log = utils.logger\n\nconst app = express()\n\nlog.info('App Starting')\n\n/**\n * Express Server Configuration\n */\napp.disable('x-powered-by')\napp.use(bodyParser.json({ type: 'application/json' }))\n\n/**\n * Express Routes\n */\napp.use('/', routes.home)\n\nmodule.exports = app",
+    "content": "import express from 'express'\nimport bodyParser from 'body-parser'\nimport expressGraphQL from 'express-graphql'\n\nimport { logger } from './utils'\nimport * as routes from './routes'\nimport schema from './schema/schema'\n\nconst app = express()\n\nlogger.info('App Starting')\n\n/**\n * Express Server Configuration\n */\napp.disable('x-powered-by')\napp.use(bodyParser.json({ type: 'application/json' }))\n\n/**\n * Express Routes\n */\napp.use('/', routes.home)\napp.use(\n  '/graphiql',\n  expressGraphQL({\n    schema,\n    graphiql: true\n  })\n)\n\nexport default app\n",
     "static": true,
-    "longname": "/Users/user05787329/progs/dmz/gql-server/src/app.js",
+    "longname": "/home/roy/progs/node-graphql/src/app.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
@@ -577,80 +577,58 @@
   {
     "__docId__": 49,
     "kind": "variable",
-    "name": "utils",
-    "memberof": "src/app.js",
-    "static": true,
-    "longname": "src/app.js~utils",
-    "access": "public",
-    "export": false,
-    "importPath": "node-express-babel/src/app.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 6,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 50,
-    "kind": "variable",
-    "name": "routes",
-    "memberof": "src/app.js",
-    "static": true,
-    "longname": "src/app.js~routes",
-    "access": "public",
-    "export": false,
-    "importPath": "node-express-babel/src/app.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 7,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 51,
-    "kind": "variable",
-    "name": "log",
-    "memberof": "src/app.js",
-    "static": true,
-    "longname": "src/app.js~log",
-    "access": "public",
-    "export": false,
-    "importPath": "node-express-babel/src/app.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 8,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 52,
-    "kind": "variable",
     "name": "app",
     "memberof": "src/app.js",
     "static": true,
     "longname": "src/app.js~app",
     "access": "public",
-    "export": false,
-    "importPath": "node-express-babel/src/app.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "node-graphql/src/app.js",
+    "importStyle": "app",
     "description": null,
-    "lineNumber": 10,
+    "lineNumber": 9,
     "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "file",
+    "name": "src/config/index.js",
+    "content": "import dotenv from 'dotenv'\n\ndotenv.config()\n\nexport default {\n  logging: {\n    level: process.env.LOG_LEVEL || 'debug',\n    query: true\n  }\n}\n",
+    "static": true,
+    "longname": "/home/roy/progs/node-graphql/src/config/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 51,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "import dotenv from 'dotenv'\n\nimport { logger as log } from './utils'\nimport app from './app'\n\ndotenv.config()\n\n/**\n * Server Configuration\n */\nconst host = process.env.HOST || '127.0.0.1'\nconst port = process.env.PORT || 5000\n\n/**\n * Runs the server\n */\napp.listen(port, host, log.info(`App listening at http://${host}:${port}`))\n",
+    "static": true,
+    "longname": "/home/roy/progs/node-graphql/src/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 52,
+    "kind": "variable",
+    "name": "host",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~host",
+    "access": "public",
+    "export": false,
+    "importPath": "node-graphql/src/index.js",
+    "importStyle": null,
+    "description": "Server Configuration",
+    "lineNumber": 11,
     "type": {
       "types": [
         "*"
@@ -660,48 +638,6 @@
   },
   {
     "__docId__": 53,
-    "kind": "file",
-    "name": "src/config/index.js",
-    "content": "import dotenv from 'dotenv'\n\ndotenv.config()\n\nmodule.exports = {\n  logging: {\n    level: process.env.LOG_LEVEL || 'debug',\n    query: true\n  }\n}\n",
-    "static": true,
-    "longname": "/Users/user05787329/progs/dmz/gql-server/src/config/index.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 54,
-    "kind": "file",
-    "name": "src/index.js",
-    "content": "import log from './utils/logger'\nimport app from './app'\nimport dotenv from 'dotenv'\n\ndotenv.config()\n\n/**\n * Server Configuration\n */\nconst host = process.env.HOST || '127.0.0.1'\nconst port = process.env.PORT || 5000\n\n/**\n * Runs the server\n */\napp.listen(port, host, log.info(`App listening at http://${host}:${port}`))",
-    "static": true,
-    "longname": "/Users/user05787329/progs/dmz/gql-server/src/index.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 55,
-    "kind": "variable",
-    "name": "host",
-    "memberof": "src/index.js",
-    "static": true,
-    "longname": "src/index.js~host",
-    "access": "public",
-    "export": false,
-    "importPath": "node-express-babel/src/index.js",
-    "importStyle": null,
-    "description": "Server Configuration",
-    "lineNumber": 10,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 56,
     "kind": "variable",
     "name": "port",
     "memberof": "src/index.js",
@@ -709,10 +645,10 @@
     "longname": "src/index.js~port",
     "access": "public",
     "export": false,
-    "importPath": "node-express-babel/src/index.js",
+    "importPath": "node-graphql/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 11,
+    "lineNumber": 12,
     "undocument": true,
     "type": {
       "types": [
@@ -722,26 +658,48 @@
     "ignore": true
   },
   {
-    "__docId__": 57,
+    "__docId__": 54,
     "kind": "file",
     "name": "src/routes/home.js",
-    "content": "import log from '../utils/logger'\nimport express from 'express'\n\nconst router = new express.Router()\n\nrouter.get('/', (req, res) => {\n  log.info('Accessed /')\n  res.json({ page: 'Home' })\n})\n\nmodule.exports = router",
+    "content": "import { logger as log } from '../utils'\nimport express from 'express'\n\nconst router = new express.Router()\n\nrouter.get('/', (req, res) => {\n  log.info('Accessed /')\n  res.json({ page: 'Home' })\n})\n\nexport default router\n",
     "static": true,
-    "longname": "/Users/user05787329/progs/dmz/gql-server/src/routes/home.js",
+    "longname": "/home/roy/progs/node-graphql/src/routes/home.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 58,
-    "kind": "variable",
-    "name": "router",
-    "memberof": "src/routes/home.js",
+    "__docId__": 55,
+    "kind": "file",
+    "name": "src/routes/index.js",
+    "content": "export { default as home } from './home'\n",
     "static": true,
-    "longname": "src/routes/home.js~router",
+    "longname": "/home/roy/progs/node-graphql/src/routes/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 56,
+    "kind": "file",
+    "name": "src/schema/schema.js",
+    "content": "import { GraphQLObjectType, GraphQLString, GraphQLSchema } from 'graphql'\nimport axios from 'axios'\n\nconst UserType = new GraphQLObjectType({\n  name: 'User',\n  fields: {\n    name: { type: GraphQLString },\n    height: { type: GraphQLString }\n  }\n})\n\nconst RootQuery = new GraphQLObjectType({\n  name: 'RootQueryType',\n  fields: {\n    user: {\n      type: UserType,\n      args: { id: { type: GraphQLString } },\n      resolve (parentValue, args) {\n        return axios\n          .get(`https://swapi.co/api/people/${args.id}`)\n          .then(resp => resp.data)\n      }\n    }\n  }\n})\n\nexport default new GraphQLSchema({\n  query: RootQuery\n})\n",
+    "static": true,
+    "longname": "/home/roy/progs/node-graphql/src/schema/schema.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 57,
+    "kind": "variable",
+    "name": "UserType",
+    "memberof": "src/schema/schema.js",
+    "static": true,
+    "longname": "src/schema/schema.js~UserType",
     "access": "public",
     "export": false,
-    "importPath": "node-express-babel/src/routes/home.js",
+    "importPath": "node-graphql/src/schema/schema.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 4,
@@ -754,28 +712,80 @@
     "ignore": true
   },
   {
+    "__docId__": 58,
+    "kind": "variable",
+    "name": "RootQuery",
+    "memberof": "src/schema/schema.js",
+    "static": true,
+    "longname": "src/schema/schema.js~RootQuery",
+    "access": "public",
+    "export": false,
+    "importPath": "node-graphql/src/schema/schema.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
     "__docId__": 59,
     "kind": "file",
-    "name": "src/utils/logger.js",
-    "content": "import { logging } from '../config'\nimport winston from 'winston'\nimport moment from 'moment'\n\n/**\n * Winston Logger with my defaults\n */\nmodule.exports = winston.createLogger({\n  transports: [\n    new winston.transports.Console({\n      timestamp () {\n        return moment().format('MM-DD-YYYY HH:mm:ss')\n      },\n      level: logging.level,\n      handleExceptions: true,\n      json: false,\n      colorize: true,\n      prettyPrint: true\n    })\n  ],\n  exitOnError: false\n})\n",
+    "name": "src/utils/index.js",
+    "content": "export { default as logger } from './logger'\n",
     "static": true,
-    "longname": "/Users/user05787329/progs/dmz/gql-server/src/utils/logger.js",
+    "longname": "/home/roy/progs/node-graphql/src/utils/index.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
+    "__docId__": 60,
+    "kind": "file",
+    "name": "src/utils/logger.js",
+    "content": "import config from '../config'\nimport winston from 'winston'\nimport moment from 'moment'\n\n/**\n * Winston Logger with my defaults\n */\n\nconst { logging } = config\n\nexport default winston.createLogger({\n  transports: [\n    new winston.transports.Console({\n      timestamp () {\n        return moment().format('MM-DD-YYYY HH:mm:ss')\n      },\n      level: logging.level,\n      handleExceptions: true,\n      json: false,\n      colorize: true,\n      prettyPrint: true\n    })\n  ],\n  exitOnError: false\n})\n",
+    "static": true,
+    "longname": "/home/roy/progs/node-graphql/src/utils/logger.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 61,
+    "kind": "variable",
+    "name": "logging",
+    "memberof": "src/utils/logger.js",
+    "static": true,
+    "longname": "src/utils/logger.js~logging",
+    "access": "public",
+    "export": false,
+    "importPath": "node-graphql/src/utils/logger.js",
+    "importStyle": null,
+    "description": "Winston Logger with my defaults",
+    "lineNumber": 9,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
     "kind": "index",
-    "content": "# Node Express Babel Base\n\n",
-    "longname": "/Users/user05787329/progs/dmz/gql-server/README.md",
+    "content": "# Node GraphQL Server\n\nBuilt with,\n- Babel v7.2\n- Node v11.4.0\n- Express v4.16.4\n\n## Setup\nTo install dependancies\n```\n$ npm i\n```\n\n## Server\nTo start server\n```\n$ npm start\n```\n\n## ESDocs\nTo create docs from src\n```\n$ npm run docs:create\n```\n\nOpen created docs\n```\n$ npm run docs:open\n```",
+    "longname": "/home/roy/progs/node-graphql/README.md",
     "name": "./README.md",
     "static": true,
     "access": "public"
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"node-express-babel\",\n  \"version\": \"0.0.1\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"start\": \"nodemon --exec babel-node src/index.js\",\n    \"build\": \"babel src —-out-dir dist\",\n    \"serve\": \"node dist/index.js\",\n    \"docs:create\": \"esdoc\",\n    \"docs:open\": \"open ./docs/index.html\"\n  },\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@babel/cli\": \"^7.2.0\",\n    \"@babel/core\": \"^7.2.0\",\n    \"@babel/node\": \"^7.2.0\",\n    \"@babel/preset-env\": \"^7.2.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"nodemon\": \"^1.18.7\"\n  },\n  \"dependencies\": {\n    \"body-parser\": \"^1.18.3\",\n    \"dotenv\": \"^6.2.0\",\n    \"express\": \"^4.16.4\",\n    \"moment\": \"^2.22.2\",\n    \"require-all\": \"^3.0.0\",\n    \"winston\": \"^3.1.0\"\n  }\n}\n",
-    "longname": "/Users/user05787329/progs/dmz/gql-server/package.json",
+    "content": "{\n  \"name\": \"node-graphql\",\n  \"version\": \"0.0.1\",\n  \"description\": \"\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/royboy5/node-graphql.git\"\n  },\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"start\": \"nodemon --exec babel-node src/index.js\",\n    \"build\": \"babel src —-out-dir dist\",\n    \"serve\": \"node dist/index.js\",\n    \"docs:create\": \"esdoc\",\n    \"docs:open\": \"open ./docs/index.html\"\n  },\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@babel/cli\": \"^7.2.0\",\n    \"@babel/core\": \"^7.2.0\",\n    \"@babel/node\": \"^7.2.0\",\n    \"@babel/preset-env\": \"^7.2.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^5.10.0\",\n    \"eslint-config-standard\": \"^12.0.0\",\n    \"eslint-plugin-import\": \"^2.14.0\",\n    \"eslint-plugin-node\": \"^8.0.0\",\n    \"eslint-plugin-promise\": \"^4.0.1\",\n    \"eslint-plugin-standard\": \"^4.0.0\",\n    \"nodemon\": \"^1.18.7\"\n  },\n  \"dependencies\": {\n    \"axios\": \"^0.18.0\",\n    \"body-parser\": \"^1.18.3\",\n    \"dotenv\": \"^6.2.0\",\n    \"express\": \"^4.16.4\",\n    \"express-graphql\": \"^0.7.1\",\n    \"graphql\": \"^14.0.2\",\n    \"moment\": \"^2.22.2\",\n    \"winston\": \"^3.1.0\"\n  }\n}\n",
+    "longname": "/home/roy/progs/node-graphql/package.json",
     "name": "package.json",
     "static": true,
     "access": "public"

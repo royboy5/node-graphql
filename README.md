@@ -22,8 +22,12 @@ To create docs from src
 ```
 $ npm run docs:create
 ```
-
-Open created docs
+### Open created docs
+### Mac
 ```
-$ npm run docs:open
+$ npm run docs:open-osx
+```
+### Linux
+```
+$ npm run docs:open-nix
 ```
