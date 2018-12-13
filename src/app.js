@@ -4,7 +4,7 @@ import expressGraphQL from 'express-graphql'
 
 import { logger } from './utils'
 import * as routes from './routes'
-import schema from './schema/schema'
+import schema from './schema'
 
 const app = express()
 
