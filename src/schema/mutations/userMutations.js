@@ -5,7 +5,7 @@ import {
   GraphQLNonNull
 } from 'graphql'
 
-import { UserType } from './types'
+import { UserType } from '../types'
 
 const userMutations = {
   addUser: {
@@ -50,4 +50,4 @@ const userMutations = {
   }
 }
 
-export default { userMutations }
+export default userMutations

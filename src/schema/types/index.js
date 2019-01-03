@@ -23,5 +23,15 @@ export { default as StarshipType } from './starshipType'
       firstName
       age
     }
+    editUser(id: 1, firstName: "Dog", age: 35, companyId: 20) {
+      id
+      firstName
+      age,
+      company {
+        id
+        name
+        description
+      }
+    }
   }
 */
