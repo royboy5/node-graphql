@@ -5,14 +5,22 @@ Built with,
 - Babel v7.2
 - Node v11.4.0
 - Express v4.16.4
+- json-server v0.14.2
 
 ## Setup
 To install dependancies
 ```
 $ npm i
 ```
+## JSON-SERVER
+To start server
+```
+$ npm run json:server
+```
+Open brower to,
+`http://localhost:5001`
 
-## Server
+## GraphQL Server
 To start server
 ```
 $ npm start
