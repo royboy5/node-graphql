@@ -1,18 +1,29 @@
 import axios from 'axios'
 import {
   GraphQLObjectType,
+  GraphQLList,
   GraphQLString,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLNonNull
+
 } from 'graphql'
 
-import { PeopleType, StarshipType, UserType, CompanyType } from '.'
+import { PeopleType, StarshipType, UserType, CompanyType } from '../types'
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
     users: {
+      type: new GraphQLList(UserType),
+      resolve () {
+        return axios
+          .get(`http://localhost:5001/users`)
+          .then(resp => resp.data)
+      }
+    },
+    user: {
       type: UserType,
-      args: { id: { type: GraphQLInt } },
+      args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
       resolve (parentValue, args) {
         return axios
           .get(`http://localhost:5001/users/${args.id}`)
@@ -21,7 +32,7 @@ const RootQuery = new GraphQLObjectType({
     },
     company: {
       type: CompanyType,
-      args: { id: { type: GraphQLInt } },
+      args: { id: { type: new GraphQLNonNull(GraphQLInt) } },
       resolve (parentValue, args) {
         return axios
           .get(`http://localhost:5001/companies/${args.id}`)

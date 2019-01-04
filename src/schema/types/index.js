@@ -4,6 +4,45 @@ export { default as PeopleType } from './peopleType'
 export { default as StarshipType } from './starshipType'
 
 /*
+  - Queries -
+    falcon:starship(id: "10") {
+    name
+    model
+    manufacturer
+    cost_in_credits
+    length
+    crew
+    passengers
+    cargo_capacity
+    consumables
+    hyperdrive_rating
+    MGLT
+    starship_class
+    pilots
+    films
+    created
+    edited
+    url
+  }
+  luke:people(id: "1") {
+    name
+    height
+    mass
+    hair_color
+    skin_color
+    eye_color
+    birth_year
+    gender
+    homeworld
+    films
+    species
+    vehicles
+    starships
+    created
+    edited
+    url
+  }
+  
   - Fragments -
   fragment companyDetails on Company {
     id
