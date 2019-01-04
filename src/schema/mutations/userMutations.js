@@ -16,8 +16,8 @@ const userMutations = new GraphQLObjectType({
       type: UserType,
       args: {
         // new GraphQLNonNull doesn't check type!
-        firstName: { type: new GraphQLNonNull(GraphQLString) },
-        age: { type: new GraphQLNonNull(GraphQLInt) },
+        firstName: { type: GraphQLString },
+        age: { type: GraphQLInt },
         companyId: { type: GraphQLInt }
       },
       resolve (parentValue, { firstName, age, companyId }) {

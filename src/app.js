@@ -20,7 +20,14 @@ app.use(bodyParser.json({ type: 'application/json' }))
 /*
  * Enable CORS
  */
-app.use(cors())
+app.use(cors({
+  origin: (origin, done) => {
+    done(null, true)
+  },
+  credentials: true,
+  maxAge: 10 * 1000,
+  optionsSuccessStatus: 200
+}))
 
 /**
  * Express Routes

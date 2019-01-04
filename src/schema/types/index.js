@@ -64,10 +64,11 @@ export { default as StarshipType } from './starshipType'
 
   - Mutations -
   mutation {
-    addUser(firstName: "Roy", age: 5) {
+    addUser(firstName: "Roy", age: 5, companyId: 20) {
       id
       firstName
       age
+      companyId
     }
     deleteUser(id: 4) {
       id
