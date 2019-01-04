@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GraphQLObjectType, GraphQLInt, GraphQLString } from 'graphql'
-import { CompanyType } from '.'
+import { CompanyType, PeopleType } from '.'
 
 /*
  * arrow function in 'fields' to fix scoping issue
@@ -18,6 +18,14 @@ export default new GraphQLObjectType({
         console.log(parentValue, args)
         return axios
           .get(`http://localhost:5001/companies/${parentValue.companyId}`)
+          .then(resp => resp.data)
+      }
+    },
+    people: {
+      type: PeopleType,
+      resolve (parentValue, args) {
+        return axios
+          .get(`https://swapi.co/api/people/${parentValue.id}`)
           .then(resp => resp.data)
       }
     }

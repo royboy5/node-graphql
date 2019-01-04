@@ -42,7 +42,19 @@ export { default as StarshipType } from './starshipType'
     edited
     url
   }
-  
+
+  {
+    users {
+      id
+      firstName
+      age
+      people {
+        name
+        species
+        starships
+      }
+    }
+  }
   - Fragments -
   fragment companyDetails on Company {
     id
