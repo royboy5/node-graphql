@@ -7,13 +7,19 @@ import { CompanyType, PeopleType } from '.'
  * when trying to do 2 way bindings
  */
 export default new GraphQLObjectType({
+  // String that defines the type we are defining
   name: 'Users',
+  // Object - The keys are different properties that this Type (User) has
   fields: () => ({
+    // Each property has a type
     id: { type: GraphQLInt },
     firstName: { type: GraphQLString },
     age: { type: GraphQLInt },
+    // Company Type
+    // Uses CompanyId to populate
     company: {
       type: CompanyType,
+      // parentValue - user object that is fetched
       resolve (parentValue, args) {
         console.log(parentValue, args)
         return axios
@@ -21,6 +27,7 @@ export default new GraphQLObjectType({
           .then(resp => resp.data)
       }
     },
+    // People Type
     people: {
       type: PeopleType,
       resolve (parentValue, args) {
