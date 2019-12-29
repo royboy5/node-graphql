@@ -9,5 +9,7 @@ export default gql`
   type User {
     id: ID!
     username: String!
+    age: Int
+    messages: [Message!]
   }
 `;

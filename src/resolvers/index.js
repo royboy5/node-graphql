@@ -1,3 +1,4 @@
 import userResolver from './user';
+import messageResolver from './message';
 
-export default [userResolver];
+export default [userResolver, messageResolver];
