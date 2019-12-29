@@ -1,17 +1,36 @@
-import dotenv from 'dotenv'
+// import https from 'https';
+import http from 'http';
 
-import { logger as log } from './utils'
-import app from './app'
+import { logger } from 'Utils';
+import config from './config';
 
-dotenv.config()
+import app from './app';
 
 /**
  * Server Configuration
  */
-const host = process.env.HOST || '127.0.0.1'
-const port = process.env.PORT || 5000
+const serverConfig = config[config.env];
+
+let server;
+
+if (serverConfig.ssl) {
+  /**
+   * Create SSL Server
+   * add in key and cert path
+   */
+  // server = https.createServer({
+  //   key: ,
+  //   cert: ,
+  // }, app)
+} else {
+  server = http.createServer(app);
+}
 
 /**
  * Runs the server
  */
-app.listen(port, host, log.info(`App listening at http://${host}:${port}`))
+server.listen({ port: serverConfig.port, host: serverConfig.hostname }, () =>
+  logger.info({
+    message: `App listening at http${serverConfig.ssl ? 's' : ''}://${serverConfig.hostname}:${serverConfig.port}`,
+  }),
+);

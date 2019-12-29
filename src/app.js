@@ -1,44 +1,26 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import expressGraphQL from 'express-graphql'
-import cors from 'cors'
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import cors from 'cors';
+import compression from 'compression';
+import depthLimit from 'graphql-depth-limit';
 
-import { logger } from './utils'
-import * as routes from './routes'
-import schema from './schema'
+import db from './data';
+import schema from './schema';
+import resolvers from './resolvers';
 
-const app = express()
+const app = express();
+app.use('*', cors());
+app.use(compression());
 
-logger.info('App Starting')
-
-/**
- * Express Server Configuration
- */
-app.disable('x-powered-by')
-app.use(bodyParser.json({ type: 'application/json' }))
-
-/*
- * Enable CORS
- */
-app.use(cors({
-  origin: (origin, done) => {
-    done(null, true)
+const apollo = new ApolloServer({
+  typeDefs: schema,
+  resolvers,
+  validationRules: [depthLimit(5)],
+  context: {
+    db,
   },
-  credentials: true,
-  maxAge: 10 * 1000,
-  optionsSuccessStatus: 200
-}))
+});
 
-/**
- * Express Routes
- */
-app.use('/', routes.home)
-app.use(
-  '/graphql',
-  expressGraphQL({
-    schema,
-    graphiql: true
-  })
-)
+apollo.applyMiddleware({ app });
 
-export default app
+export default app;

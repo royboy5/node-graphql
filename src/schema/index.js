@@ -1,12 +1,19 @@
-import { GraphQLSchema } from 'graphql'
+import { gql } from 'apollo-server-express';
 
-import query from './queries/rootQuery'
-import mutation from './mutations/userMutations'
+import userSchema from './user';
 
-// Schemas - How the data is arranged and accessed
-export default new GraphQLSchema({
-  // Root query - landing spot for graph node
-  query,
-  // access and changes to the data
-  mutation
-})
+const linkSchema = gql`
+  type Query {
+    _: Boolean
+  }
+
+  type Mutation {
+    _: Boolean
+  }
+
+  type Subscription {
+    _: Boolean
+  }
+`;
+
+export default [linkSchema, userSchema];
